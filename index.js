@@ -1,13 +1,21 @@
-const express = require("express")
+import express from "express";
 
-const app = express()
+import planetRouter from "./routers/planet.router.js";
 
-const PORT = process.env.PORT || 3000
+const app = express();
 
-app.get("/",(req,res)=>{
-    res.status(200).json({message: "Le VBA est trop bon c'est lui le maitre du code"});
-})
+app.use(express.json());
 
-app.listen(PORT, ()=>{
-    console.log("Lancement du serveur port : ",PORT);
-})
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res
+    .status(200)
+    .json({ message: "Le VBA est trop bon c'est lui le maitre du code" });
+});
+
+app.use("/planet", planetRouter);
+
+app.listen(PORT, () => {
+  console.log("Lancement du serveur port : ", PORT);
+});
